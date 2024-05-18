@@ -1,0 +1,89 @@
+# Hi, it's me again.
+# Here you can plot graphics of soil stress, mostly with water, effective and total stress. And yes, I use my native language due to the public I want to reach.
+
+import matplotlib.pyplot as plt
+
+x1 = [] # Primeira variável no eixo x - poropressao
+x2 = [] # Segunda variável no eixo x - tve
+x3 = [] # Terceira variável no eixo x - tvt
+x4 = [] # Segunda variável no eixo x - the
+x5 = [] # Terceira variável no eixo x - tht
+y = [] # Variável no eixo y - profundidade
+
+# Pede ao usuário o número de elementos
+num_elementos = int(input("Digite o número de pontos analisados, considere ponto superior e inferior como pontos diferentes: "))
+
+# Solicita ao usuário que insira os elementos
+for i in range(num_elementos):
+    elemento0 = float(input(f"Digite os dados de profundidade para o ponto {i + 1}: "))
+    y.append(elemento0)
+    elemento1 = float(input(f"Digite os dados de poropressão para o ponto {i + 1}: "))
+    x1.append(elemento1)
+    elemento2 = float(input(f"Digite os dados de tensão vertical efetiva para o ponto {i + 1}: "))
+    x2.append(elemento2)
+    elemento3 = float(input(f"Digite os dados de tensão vertical total para o ponto {i + 1}: "))
+    x3.append(elemento3)
+    elemento4 = float(input(f"Digite os dados de tensão horizontal efetiva para o ponto {i + 1}: "))
+    x4.append(elemento4)
+    elemento5 = float(input(f"Digite os dados de tensão horizontal total para o ponto {i + 1}: "))
+    x5.append(elemento5)
+
+# Criar o gráfico de linhas ligadas por pontos
+fig, ax = plt.subplots(figsize=(8, 6))
+
+# Plotar os dados
+ax.plot(x1, y, label='u')
+ax.plot(x2, y, label='tve')
+ax.plot(x3, y, label='tvt')
+
+# Personalizar o gráfico
+plt.title('Tensões Verticais')
+ax.set_ylabel('profundidade - z (m)')  # Rótulo do eixo y
+ax.legend(loc='lower right')  # Adicionar legenda e ajustar a posição
+ax.grid(True)  # Adicionar grades (opcional)
+
+# Inverter o eixo y para que a profundidade aumente de cima para baixo
+ax.invert_yaxis()
+
+# Criar um segundo eixo x no topo
+ax2 = ax.twiny()
+
+# Esconder os ticks do primeiro eixo x
+ax.set_xticks([])
+
+# Definir rótulos e limites para o segundo eixo x
+ax2.set_xlabel('u, tve e tvt (kPa)')
+ax2.set_xlim(ax.get_xlim())
+
+# Exibir o gráfico
+plt.show()
+
+# Criar o gráfico de linhas ligadas por pontos
+fig, ax = plt.subplots(figsize=(8, 6))
+
+# Plotar os dados
+ax.plot(x1, y, label='u')
+ax.plot(x4, y, label='the')
+ax.plot(x5, y, label='tht')
+
+# Personalizar o gráfico
+plt.title('Tensões Horizontais')
+ax.set_ylabel('profundidade - z (m)')  # Rótulo do eixo y
+ax.legend(loc='lower right')  # Adicionar legenda e ajustar a posição
+ax.grid(True)  # Adicionar grades
+
+# Inverter o eixo y para que a profundidade aumente de cima para baixo
+ax.invert_yaxis()
+
+# Criar um segundo eixo x no topo
+ax2 = ax.twiny()
+
+# Esconder os ticks do primeiro eixo x
+ax.set_xticks([])
+
+# Definir rótulos e limites para o segundo eixo x
+ax2.set_xlabel('u, the e tht (kPa)')
+ax2.set_xlim(ax.get_xlim())
+
+# Exibir o gráfico
+plt.show()
